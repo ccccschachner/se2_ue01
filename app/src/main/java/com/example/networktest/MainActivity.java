@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -112,34 +114,6 @@ public class MainActivity extends AppCompatActivity {
         return output;
 
         }
-
-        public void buttonClicked(){
-        Button button = findViewById(R.id.button_first);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            TextView output = (TextView) findViewById(R.id.textview_response);
-            output.setText("test");
-
-            }
-        });
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
