@@ -28,14 +28,24 @@ import java.io.*;
 import java.net.*;
 
 import java.net.ServerSocket;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+    private EditText inputField;
+    private TextView resultText;
+    private Socket socket;
+    private OutputStream outputStream;
+    private InputStream inputStream;
 
-
+    private Button button;
 
 
     @Override
@@ -52,7 +62,16 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+        button = findViewById(R.id.button);
+        inputField = findViewById(R.id.editText_MatrNr);
+        resultText = findViewById(R.id.textview_response);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendInput(inputField.getText().toString());
+            }
+        });
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,28 +111,34 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    private void sendInput(String input) {
 
-    public static String serverRequest(String input) throws Exception {
+        try {
+            socket = new Socket("se2-isys.aau.at", 53212);
+            outputStream = socket.getOutputStream();
+            inputStream = socket.getInputStream();
 
-        String output;
+            // Convert input to byte stream and send it to the server
+            byte[] inputData = input.getBytes();
+            outputStream.write(inputData);
 
-        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+            // Wait for response from server
+            byte[] buffer = new byte[1024];
+            int bytesRead = inputStream.read(buffer);
 
-        Socket clientSocket = new Socket("se2-isys.aau.at",53212);
+            // Convert response to string and display it in the result text field
+            String result = new String(buffer, 0, bytesRead);
+            resultText.setText(result);
 
-        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            // Close the socket and streams
+            socket.close();
+            outputStream.close();
+            inputStream.close();
 
-        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-        input = inFromUser.readLine();
-
-        outToServer.writeBytes(input+ '\n');
-
-        output = inFromServer.readLine();
-
-        return output;
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-
+    }
 }
+
