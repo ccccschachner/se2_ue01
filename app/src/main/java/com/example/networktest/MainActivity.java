@@ -17,14 +17,28 @@ import com.example.networktest.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toolbar;
+
+import org.w3c.dom.Text;
+
+import java.io.*;
+import java.net.*;
+
+import java.net.ServerSocket;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -35,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,4 +89,57 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
+    public static String serverRequest(String input) throws Exception {
+
+        String output;
+
+        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+
+        Socket clientSocket = new Socket("se2-isys.aau.at",53212);
+
+        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+
+        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+        input = inFromUser.readLine();
+
+        outToServer.writeBytes(input+ '\n');
+
+        output = inFromServer.readLine();
+
+        return output;
+
+        }
+
+        public void buttonClicked(){
+        Button button = findViewById(R.id.button_first);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            TextView output = (TextView) findViewById(R.id.textview_response);
+            output.setText("test");
+
+            }
+        });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

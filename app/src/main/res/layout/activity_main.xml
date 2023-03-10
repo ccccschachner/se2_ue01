@@ -7,10 +7,14 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#009688"
-        android:theme="@style/Theme.Networktest.AppBarOverlay">
+        android:theme="@style/Theme.Networktest.AppBarOverlay"
+        app:layout_anchor="@+id/appBarLayout"
+        app:layout_anchorGravity="top|center">
+
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -21,7 +25,11 @@
             app:popupTheme="@style/Theme.Networktest.PopupOverlay"
             tools:visibility="visible" />
 
+
+
     </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <include
         layout="@layout/content_main"

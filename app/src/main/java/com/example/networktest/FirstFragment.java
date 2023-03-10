@@ -4,16 +4,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+
+
 import com.example.networktest.databinding.FragmentFirstBinding;
+
+import java.io.IOException;
 
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
+
+    public int matrNr;
 
     @Override
     public View onCreateView(
@@ -26,14 +36,14 @@ public class FirstFragment extends Fragment {
 
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+  public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                /*NavHostFragment.findNavController(FirstFragment.this)
+                    .navigate(R.id.action_FirstFragment_to_SecondFragment);*/
+
             }
         });
     }
@@ -43,5 +53,10 @@ public class FirstFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
+
+
+
 
 }
