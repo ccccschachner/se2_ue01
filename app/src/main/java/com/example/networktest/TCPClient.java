@@ -1,34 +1,57 @@
 package com.example.networktest;
-import android.net.IpSecManager;
-
 import java.io.*;
 import java.net.*;
 
 public class TCPClient {
 
-    public static void main(String[] args) throws Exception {
-        serverRequest("01507521");
-    }
-    public static String serverRequest(String input) throws Exception {
+    public static String run(String input) throws Exception {
 
-        String output;
+        String sentence;
+        String serverResponse;
+        String calculation;
+        int even=0;
+        int odd=0;
+        int temp=0;
 
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 
-        Socket clientSocket = new Socket("se2-isys.aau.at",53212);
+        Socket clientSocket = new Socket("se2-isys.aau.at", 53212);
 
         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 
         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-        input = inFromUser.readLine();
+        sentence = input;
 
-        outToServer.writeBytes(input+ '\n');
+        outToServer.writeBytes(sentence + '\n');
 
-        output = inFromServer.readLine();
+        serverResponse = inFromServer.readLine();
 
-        return output;
+        //alternierende Quersumme bilden
+        for (int i =0; i<sentence.length(); i++){
+            temp = Integer.parseInt(sentence.charAt(i)+"");
+            even+=temp;
+        }
+
+        for (int i=1; i<sentence.length();i++){
+            temp = Integer.parseInt(sentence.charAt(i)+"");
+            odd+=temp;
+        }
+
+        temp = even-odd;
+        if (temp%2==0){
+            calculation = "Gerade.";
+        }
+        else{
+            calculation = "Ungerade.";
+        }
+
+        clientSocket.close();
+
+        System.out.println("From Server: " + serverResponse);
+
+        return calculation;
+
 
     }
-
 }

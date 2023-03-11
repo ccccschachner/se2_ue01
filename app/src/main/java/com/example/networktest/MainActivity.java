@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendInput(inputField.getText().toString());
+                //Serverrequest
+
             }
         });
 
@@ -111,34 +112,5 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    private void sendInput(String input) {
-
-        try {
-            socket = new Socket("se2-isys.aau.at", 53212);
-            outputStream = socket.getOutputStream();
-            inputStream = socket.getInputStream();
-
-            // Convert input to byte stream and send it to the server
-            byte[] inputData = input.getBytes();
-            outputStream.write(inputData);
-
-            // Wait for response from server
-            byte[] buffer = new byte[1024];
-            int bytesRead = inputStream.read(buffer);
-
-            // Convert response to string and display it in the result text field
-            String result = new String(buffer, 0, bytesRead);
-            resultText.setText(result);
-
-            // Close the socket and streams
-            socket.close();
-            outputStream.close();
-            inputStream.close();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
 
