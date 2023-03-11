@@ -4,7 +4,11 @@ import java.net.*;
 
 public class TCPClient {
 
-    public static String run(String input) throws Exception {
+    String input;
+    TCPClient(String input){
+        this.input = input;
+    }
+    public String run() throws Exception {
 
         String sentence;
         String serverResponse;

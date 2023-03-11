@@ -24,26 +24,16 @@ import android.widget.Toolbar;
 
 import org.w3c.dom.Text;
 
-import java.io.*;
-import java.net.*;
-
-import java.net.ServerSocket;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
-    private EditText inputField;
-    private TextView resultText;
-    private Socket socket;
-    private OutputStream outputStream;
-    private InputStream inputStream;
+    public EditText inputField;
+    public TextView resultText;
+    public static String input;
+    public String output;
 
     private Button button;
 
@@ -69,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                inputField = findViewById(R.id.editText_MatrNr);
+                input = inputField.getText().toString();
+                NetworkThread thread = new NetworkThread();
+                thread.start();
                 //Serverrequest
 
             }
