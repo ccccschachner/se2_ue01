@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public EditText inputField;
     public TextView resultText;
     public static String input;
-    public String output;
+    public static String outputServer;
 
     private Button button;
 
@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 input = inputField.getText().toString();
                 NetworkThread thread = new NetworkThread();
                 thread.start();
+                resultText = findViewById(R.id.textview_response);
+                resultText.setText(outputServer);
                 //Serverrequest
 
             }

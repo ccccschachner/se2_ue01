@@ -9,6 +9,8 @@ public class NetworkThread extends Thread{
 
         try {
            output =  client.run();
+           MainActivity.outputServer = output;
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

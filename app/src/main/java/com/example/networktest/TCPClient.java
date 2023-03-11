@@ -44,10 +44,10 @@ public class TCPClient {
 
         temp = even-odd;
         if (temp%2==0){
-            calculation = "Gerade.";
+            calculation = "Die alternierende Quersumme ist gerade.";
         }
         else{
-            calculation = "Ungerade.";
+            calculation = "Die alternierende Quersumme ist ungerade.";
         }
 
         clientSocket.close();
