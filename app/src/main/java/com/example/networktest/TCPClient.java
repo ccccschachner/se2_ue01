@@ -1,21 +1,24 @@
 package com.example.networktest;
+
 import java.io.*;
 import java.net.*;
 
 public class TCPClient {
 
     String input;
-    TCPClient(String input){
+
+    TCPClient(String input) {
         this.input = input;
     }
+
     public String run() throws Exception {
 
         String sentence;
         String serverResponse;
         String calculation;
-        int even=0;
-        int odd=0;
-        int temp=0;
+        int even = 0;
+        int odd = 0;
+        int temp = 0;
 
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 
@@ -32,21 +35,28 @@ public class TCPClient {
         serverResponse = inFromServer.readLine();
 
         //alternierende Quersumme bilden
-        for (int i =0; i<sentence.length(); i++){
-            temp = Integer.parseInt(sentence.charAt(i)+"");
-            even+=temp;
+
+        for (int i = 0; i < sentence.length(); i++) {
+
+            temp = Integer.parseInt(sentence.charAt(i) + "");
+
+            if (i % 2 != 1) {
+                even += temp;
+            } else {
+                odd += temp;
+            }
         }
 
-        for (int i=1; i<sentence.length();i++){
-            temp = Integer.parseInt(sentence.charAt(i)+"");
-            odd+=temp;
+        if (odd >= even){
+            temp = odd-even;
+        }
+        else {
+            temp = even-odd;
         }
 
-        temp = even-odd;
-        if (temp%2==0){
+        if (temp % 2 == 0) {
             calculation = "Die alternierende Quersumme ist gerade.";
-        }
-        else{
+        } else {
             calculation = "Die alternierende Quersumme ist ungerade.";
         }
 

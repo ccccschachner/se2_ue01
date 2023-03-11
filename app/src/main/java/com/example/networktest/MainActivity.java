@@ -20,9 +20,6 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toolbar;
-
-import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
     public static String input;
     public static String outputServer;
 
-    private Button button;
+
+    private Button buttonSend;
+    private Button buttonCalc;
 
 
     @Override
@@ -52,21 +51,26 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        button = findViewById(R.id.button);
+        buttonSend = findViewById(R.id.button);
         inputField = findViewById(R.id.editText_MatrNr);
         resultText = findViewById(R.id.textview_response);
+        buttonCalc = findViewById(R.id.button_calc);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 inputField = findViewById(R.id.editText_MatrNr);
                 input = inputField.getText().toString();
                 NetworkThread thread = new NetworkThread();
                 thread.start();
+            }
+        });
+
+        buttonCalc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 resultText = findViewById(R.id.textview_response);
                 resultText.setText(outputServer);
-                //Serverrequest
-
             }
         });
 
