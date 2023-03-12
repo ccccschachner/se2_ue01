@@ -20,7 +20,6 @@ public class TCPClient {
         int odd = 0;
         int temp = 0;
 
-        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 
         Socket clientSocket = new Socket("se2-isys.aau.at", 53212);
 
