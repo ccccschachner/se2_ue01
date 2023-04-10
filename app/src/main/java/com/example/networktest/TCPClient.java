@@ -63,6 +63,8 @@ public class TCPClient {
 
         System.out.println("From Server: " + serverResponse);
 
+        MainActivity.text2.setText(serverResponse);
+
         return calculation;
 
 
