@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public EditText inputField;
     public TextView resultText;
+    public static TextView text2;
     public static String input;
     public static String outputServer;
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         inputField = findViewById(R.id.editText_MatrNr);
         resultText = findViewById(R.id.textview_response);
         buttonCalc = findViewById(R.id.button_calc);
+        text2 = findViewById(R.id.text2);
 
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
